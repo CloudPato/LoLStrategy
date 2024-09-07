@@ -1,0 +1,7 @@
+{
+  "name": "LoLStrategy",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
