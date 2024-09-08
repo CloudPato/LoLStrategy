@@ -1,0 +1,21 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Inicio</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="#"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <!-- Mensaje de bienvenida -->
+  <ion-text *ngIf="usuario">
+    <h2>Bienvenido, {{ usuario.username }}!</h2>
+  </ion-text>
+
+  <!-- Botón para mostrar campeones -->
+  <ion-button expand="full" (click)="mostrarCampeones()">Mostrar Campeones</ion-button>
+  
+  <!-- Botón para ingresar campeones si el usuario es administrador -->
+  <ion-button *ngIf="obtenerAdministrador()" expand="block" routerLink="/crear-campeon">Ingresar Campeón</ion-button>
+</ion-content>

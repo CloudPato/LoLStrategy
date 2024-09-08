@@ -1,0 +1,49 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Lista de Campeones</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="#"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <!-- Lista de campeones con desplegable -->
+  <ion-accordion-group *ngIf="campeones.length > 0">
+    <ion-accordion *ngFor="let campeon of campeones">
+      <ion-item slot="header" color="light">
+        <ion-label>{{ campeon.nombre }}</ion-label>
+      </ion-item>
+      
+      <div slot="content">
+        <ion-card>
+          <ion-card-content>
+            <!-- Descripción del campeón -->
+            <p><strong>Descripción:</strong> {{ campeon.descripcion }}</p>
+
+            <!-- Habilidad base -->
+            <p><strong>Habilidad Base:</strong> {{ campeon.habilidad_base ? campeon.habilidad_base : 'Sin Habilidad Base' }}</p>
+
+            <!-- Lista de habilidades -->
+            <ion-list>
+              <ion-list-header>
+                <strong>Habilidades</strong>
+              </ion-list-header>
+              <ion-item *ngFor="let habilidad of campeon.habilidad">
+                <ion-label>
+                  <h2>{{ habilidad.nombre }}</h2>
+                  <p>{{ habilidad.descripcion || 'Sin descripción disponible' }}</p>
+                </ion-label>
+              </ion-item>
+            </ion-list>
+          </ion-card-content>
+        </ion-card>
+      </div>
+    </ion-accordion>
+  </ion-accordion-group>
+
+  <!-- Mostrar mensaje si no hay campeones -->
+  <ion-text *ngIf="campeones.length === 0" color="medium" class="ion-text-center">
+    <p>No hay campeones para mostrar.</p>
+  </ion-text>
+</ion-content>
