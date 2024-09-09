@@ -1,0 +1,60 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Agregar Campeones</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="#"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Agregar Campeón</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <form class="form-container">
+        
+        <ion-item>
+          <ion-label position="floating">Nombre</ion-label>
+          <ion-input id="nombre" [(ngModel)]="campeon.nombre" name="nombre" type="text"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="floating">Descripción</ion-label>
+          <ion-textarea id="descripcion" [(ngModel)]="campeon.descripcion" name="descripcion"></ion-textarea>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="floating">Habilidad Base</ion-label>
+          <ion-input id="habilidad-base" [(ngModel)]="campeon.habilidad_base" name="habilidad-base" type="text"
+           placeholder="Habilidad base del campeón"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="floating">Nueva Habilidad (Nombre)</ion-label>
+          <ion-input id="habilidad-nombre" [(ngModel)]="nuevaHabilidad.nombre" name="habilidad-nombre" type="text" 
+          placeholder="Nombre de la habilidad"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="floating">Descripción de la Habilidad</ion-label>
+          <ion-textarea id="habilidad-descripcion" [(ngModel)]="nuevaHabilidad.descripcion" name="habilidad-descripcion"
+           placeholder="Descripción de la habilidad"></ion-textarea>
+        </ion-item>
+
+        <ion-button class="small-button" expand="full" color="primary" (click)="agregarHabilidad()">Agregar Habilidad</ion-button>
+
+        <ion-card-subtitle>Habilidades del Campeón</ion-card-subtitle>
+        <ion-list>
+          <ion-item *ngFor="let habilidad of campeon.habilidad">
+            {{ habilidad.nombre }}
+          </ion-item>
+        </ion-list>
+
+        <ion-button class="small-button" expand="full" color="secondary" (click)="finalizarAgregacion()">Finalizar </ion-button>
+        <ion-button class="small-button" expand="full" color="success" (click)="guardarCampeon()">Guardar Campeón</ion-button>
+      </form>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
