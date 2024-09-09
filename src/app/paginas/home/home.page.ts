@@ -36,7 +36,7 @@ export class HomePage implements OnInit {
   // Método que verifica si el usuario autenticado tiene el rol de administrador.
   obtenerAdministrador() {
     // Busca en los roles del usuario si alguno tiene el nombre 'administrador'.
-    // Si lo encuentra, devuelve 'true', lo que permitirá que el usuario vea opciones de administrador.
+    // Si lo encuentra, devuelve "true", lo que permitirá que el usuario vea opciones de administrador.
     const esAdministrador = this.usuario?.role.some(rol => rol.nombre === 'administrador');
     return esAdministrador;
   }
