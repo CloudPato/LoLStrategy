@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Usuario } from 'src/app/Modals/Usuario';
-
+import { Role } from 'src/app/Modals/role';
 @Injectable({
   providedIn: 'root'
 })
 export class UsuariosService {
 
-  private lista_de_usuarios: Usuario[] = [
+  private listaUsuarios: Usuario[] = [
     {
       nombre: "carlos",
       apellido: "fuentes",
@@ -38,15 +38,30 @@ export class UsuariosService {
       ]
     }
   ];
-  constructor() { }
+  constructor() {}
 
-  public obtener_lista_usuarios(): Usuario[] {
-    return this.lista_de_usuarios;
+  // Método para obtener la lista de usuarios
+  obtener_lista_usuarios(): Usuario[] {
+    return this.listaUsuarios;
   }
 
-  public obtener_info_usuario(username: string): Usuario | undefined {
-    console.log(username)
-    return this.lista_de_usuarios.find(usuario => username == usuario.username)
+  // Método para obtener un usuario por su nombre de usuario
+  obtener_info_usuario(username: string): Usuario | undefined {
+    return this.listaUsuarios.find(usuario => usuario.username === username);
   }
 
+  // Método para agregar un nuevo usuario con todos los campos
+  addUsuario(nuevoUsuario: { username: string, password: string, nombre: string, apellido: string, edad: number, correo: string, role: string }) {
+    const nuevoRoleId = this.listaUsuarios.length + 1; // Generar un id único para cada nuevo rol
+    const usuario: Usuario = {
+      username: nuevoUsuario.username,
+      password: nuevoUsuario.password,
+      nombre: nuevoUsuario.nombre,
+      apellido: nuevoUsuario.apellido,
+      edad: nuevoUsuario.edad,
+      correo: nuevoUsuario.correo,
+      role: [{ id: nuevoRoleId, nombre: nuevoUsuario.role }]  // Añadir el id al role
+    };
+    this.listaUsuarios.push(usuario);
+  }
 }

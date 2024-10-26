@@ -13,9 +13,9 @@
     <h2>Bienvenido, {{ usuario.username }}!</h2>
   </ion-text>
 
-  <!-- Botón para mostrar campeones -->
-  <ion-button expand="full" (click)="mostrarCampeones()">Mostrar Campeones</ion-button>
+  <!-- Botón para ver campeones -->
+  <ion-button expand="full" routerLink="/campeones-list">Lista de Campeones</ion-button>
   
-  <!-- Botón para ingresar campeones si el usuario es administrador -->
-  <ion-button *ngIf="obtenerAdministrador()" expand="block" routerLink="/crear-campeon">Ingresar Campeón</ion-button>
+  <!-- Botón para crear usuario -->
+  <ion-button *ngIf="obtenerAdministrador()" expand="block" routerLink="/crear-usuario">Crear Usuario</ion-button>
 </ion-content>

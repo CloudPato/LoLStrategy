@@ -4,17 +4,17 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { CrearCampeonPageRoutingModule } from './crear-campeon-routing.module';
+import { CrearUsuarioPageRoutingModule } from './crear-usuario-routing.module';
 
-import { CrearCampeonPage } from './crear-campeon.page';
+import { CrearUsuarioPage } from './crear-usuario.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    CrearCampeonPageRoutingModule
+    CrearUsuarioPageRoutingModule
   ],
-  declarations: [CrearCampeonPage]
+  declarations: [CrearUsuarioPage]
 })
-export class CrearCampeonPageModule {}
+export class CrearUsuarioPageModule {}

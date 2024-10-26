@@ -1,8 +1,6 @@
 import { Habilidad } from "./habilidad";
-export interface Campeon{
-    id: number|null;
+export interface Campeon {
+    id: number;
     nombre: string;
-    habilidad_base: string|null;
-    descripcion: string;
-    habilidad: Habilidad[]
-}
+    habilidades: Habilidad[]
+  }

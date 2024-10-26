@@ -3,9 +3,10 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  apiUrl: 'https://ddragon.leagueoflegends.com/cdn/14.21.1/data/es_ES/champion.json',
+  apiToken: 'RGAPI-45db3cb2-82d0-440f-a9af-f8b10a308f6a' // Asegúrate de agregar tu token aquí
 };
-
 /*
  * For easier debugging in development mode, you can import the following file
  * to ignore zone related error stack frames such as `zone.run`, `zoneDelegate.invokeTask`.

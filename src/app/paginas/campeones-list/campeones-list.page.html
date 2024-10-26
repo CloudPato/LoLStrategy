@@ -1,49 +1,59 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
-    <ion-title>Lista de Campeones</ion-title>
+    <ion-title>Campeones</ion-title>
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="#"></ion-back-button>
+      <ion-back-button defaultHref="/home"></ion-back-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-padding">
-  <!-- Lista de campeones con desplegable -->
-  <ion-accordion-group *ngIf="campeones.length > 0">
-    <ion-accordion *ngFor="let campeon of campeones">
-      <ion-item slot="header" color="light">
-        <ion-label>{{ campeon.nombre }}</ion-label>
-      </ion-item>
-      
-      <div slot="content">
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="6" *ngFor="let campeon of campeones" (click)="showChampionInfo(campeon)">
         <ion-card>
+          <ion-card-header>
+            <ion-card-title>{{ campeon.name }}</ion-card-title>
+          </ion-card-header>
           <ion-card-content>
-            <!-- Descripción del campeón -->
-            <p><strong>Descripción:</strong> {{ campeon.descripcion }}</p>
-
-            <!-- Habilidad base -->
-            <p><strong>Habilidad Base:</strong> {{ campeon.habilidad_base ? campeon.habilidad_base : 'Sin Habilidad Base' }}</p>
-
-            <!-- Lista de habilidades -->
-            <ion-list>
-              <ion-list-header>
-                <strong>Habilidades</strong>
-              </ion-list-header>
-              <ion-item *ngFor="let habilidad of campeon.habilidad">
-                <ion-label>
-                  <h2>{{ habilidad.nombre }}</h2>
-                  <p>{{ habilidad.descripcion || 'Sin descripción disponible' }}</p>
-                </ion-label>
-              </ion-item>
-            </ion-list>
+            <img [src]="'https://ddragon.leagueoflegends.com/cdn/14.21.1/img/champion/' + campeon.id + '.png'" alt="{{ campeon.name }}">
           </ion-card-content>
         </ion-card>
-      </div>
-    </ion-accordion>
-  </ion-accordion-group>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 
-  <!-- Mostrar mensaje si no hay campeones -->
-  <ion-text *ngIf="campeones.length === 0" color="medium" class="ion-text-center">
-    <p>No hay campeones para mostrar.</p>
-  </ion-text>
+  <ion-spinner *ngIf="campeones.length === 0"></ion-spinner>
+
+  <!-- Modal para información del campeón -->
+  <ion-modal [isOpen]="isModalOpen" (didDismiss)="isModalOpen = false">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-title>{{ selectedChampion?.name }}</ion-title>
+          <ion-buttons slot="end">
+            <ion-button (click)="isModalOpen = false">Cerrar</ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content>
+        <img [src]="'https://ddragon.leagueoflegends.com/cdn/14.21.1/img/champion/' + selectedChampion?.id + '.png'" alt="{{ selectedChampion?.name }}">
+        <h2>Título: {{ selectedChampion?.title }}</h2>
+        <p>{{ selectedChampion?.blurb }}</p>
+
+        <h3>Habilidades:</h3>
+        <ion-list>
+          <ion-item *ngFor="let ability of selectedChampion?.spells">
+            <ion-thumbnail slot="start">
+              <img [src]="'https://ddragon.leagueoflegends.com/cdn/14.21.1/img/spell/' + ability.id + '.png'" alt="{{ ability.name }}">
+            </ion-thumbnail>
+            <ion-label>
+              <h4>{{ ability.name }}</h4>
+              <p>{{ ability.description }}</p>
+            </ion-label>
+          </ion-item>
+        </ion-list>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
 </ion-content>
