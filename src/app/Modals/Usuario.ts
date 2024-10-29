@@ -1,10 +1,6 @@
-import { Role } from "./role";
-export interface Usuario{
-    nombre: string;
-    apellido: string;
-    edad: number;
-    correo: string;
+export interface Usuario {
+    id: bigint;
     username: string;
-    password: string;
-    role:Role[]    
+    password: string; // Asegúrate de que las contraseñas estén encriptadas en la base de datos
+
 }

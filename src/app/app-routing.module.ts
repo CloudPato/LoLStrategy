@@ -14,19 +14,14 @@ const routes: Routes = [
     path: 'login',
     loadChildren: () => import('./paginas/login/login.module').then( m => m.LoginPageModule)
   },
-  
-  {
-    path: 'registrarse',
-    loadChildren: () => import('./paginas/registrarse/registrarse.module').then( m => m.RegistrarsePageModule)
-  },
-  {
-    path: 'crear-usuario',
-    loadChildren: () => import('./paginas/crear-usuario/crear-usuario.module').then( m => m.CrearUsuarioPageModule)
-  },
   {
     path: '',
     redirectTo: 'login',
     pathMatch: 'full'
+  },
+  {
+    path: 'register',
+    loadChildren: () => import('./paginas/register/register.module').then( m => m.RegisterPageModule)
   }
 
 

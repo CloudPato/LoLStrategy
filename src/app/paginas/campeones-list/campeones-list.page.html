@@ -8,14 +8,18 @@
 </ion-header>
 
 <ion-content>
+  <!-- Contenedor principal para la interfaz de usuario -->
   <ion-grid>
     <ion-row>
+      <!-- Itera sobre la lista de campeones y crea una tarjeta para cada uno -->
       <ion-col size="6" *ngFor="let campeon of campeones" (click)="showChampionInfo(campeon)">
         <ion-card>
           <ion-card-header>
+            <!-- Título de la tarjeta que muestra el nombre del campeón -->
             <ion-card-title>{{ campeon.name }}</ion-card-title>
           </ion-card-header>
           <ion-card-content>
+            <!-- Imagen del campeón obtenida desde la URL de la API -->
             <img [src]="'https://ddragon.leagueoflegends.com/cdn/14.21.1/img/champion/' + campeon.id + '.png'" alt="{{ campeon.name }}">
           </ion-card-content>
         </ion-card>
@@ -23,28 +27,34 @@
     </ion-row>
   </ion-grid>
 
+  <!-- Spinner que se muestra mientras se cargan los campeones (si no hay campeones) -->
   <ion-spinner *ngIf="campeones.length === 0"></ion-spinner>
 
-  <!-- Modal para información del campeón -->
+  <!-- Modal para mostrar la información del campeón seleccionado -->
   <ion-modal [isOpen]="isModalOpen" (didDismiss)="isModalOpen = false">
     <ng-template>
       <ion-header>
         <ion-toolbar>
+          <!-- Título del modal que muestra el nombre del campeón seleccionado -->
           <ion-title>{{ selectedChampion?.name }}</ion-title>
           <ion-buttons slot="end">
+            <!-- Botón para cerrar el modal -->
             <ion-button (click)="isModalOpen = false">Cerrar</ion-button>
           </ion-buttons>
         </ion-toolbar>
       </ion-header>
       <ion-content>
+        <!-- Imagen del campeón seleccionado -->
         <img [src]="'https://ddragon.leagueoflegends.com/cdn/14.21.1/img/champion/' + selectedChampion?.id + '.png'" alt="{{ selectedChampion?.name }}">
         <h2>Título: {{ selectedChampion?.title }}</h2>
         <p>{{ selectedChampion?.blurb }}</p>
 
         <h3>Habilidades:</h3>
         <ion-list>
+          <!-- Itera sobre las habilidades del campeón seleccionado y muestra la información -->
           <ion-item *ngFor="let ability of selectedChampion?.spells">
             <ion-thumbnail slot="start">
+              <!-- Imagen de la habilidad obtenida desde la URL de la API -->
               <img [src]="'https://ddragon.leagueoflegends.com/cdn/14.21.1/img/spell/' + ability.id + '.png'" alt="{{ ability.name }}">
             </ion-thumbnail>
             <ion-label>

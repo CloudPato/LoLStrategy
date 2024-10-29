@@ -1,21 +1,16 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
-    <ion-title>Inicio</ion-title>
+    <ion-title>Lista de Campeones</ion-title>
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="#"></ion-back-button>
+      <ion-back-button defaultHref="/login"></ion-back-button>
     </ion-buttons>
   </ion-toolbar>
+  
 </ion-header>
 
-<ion-content class="ion-padding">
-  <!-- Mensaje de bienvenida -->
-  <ion-text *ngIf="usuario">
-    <h2>Bienvenido, {{ usuario.username }}!</h2>
-  </ion-text>
-
-  <!-- Botón para ver campeones -->
-  <ion-button expand="full" routerLink="/campeones-list">Lista de Campeones</ion-button>
-  
-  <!-- Botón para crear usuario -->
-  <ion-button *ngIf="obtenerAdministrador()" expand="block" routerLink="/crear-usuario">Crear Usuario</ion-button>
+<ion-content>
+  <!-- Botón para ir a campeones-list -->
+  <ion-button expand="full" routerLink="/campeones-list">
+    Ver Todos los Campeones
+  </ion-button>
 </ion-content>

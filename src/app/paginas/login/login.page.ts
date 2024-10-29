@@ -1,53 +1,42 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { AutentificacionService } from 'src/app/Services/autentificacion/autentificacion.service';
-
+import { SupabaseService } from 'src/app/Services/supabase/supabase.service';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
 })
-export class LoginPage implements OnInit {
+export class LoginPage {
+  username: string = '';
+  password: string = '';
 
-  username: string = "";
-  password: string = "";
-  errorMessage: string = "";
+  constructor(private supabaseService: SupabaseService, private router: Router) {}
 
-  constructor(private _authService: AutentificacionService, private router: Router) { }
 
-  ngOnInit() {
-  }
-
-  login(): void {
-    if (this.username.trim() === '' || this.password.trim() === '') {
-      this.errorMessage = "Se requieren nombre de usuario y contraseña.";
-      return;
+  async login() {
+    // Validar campos
+    if (!this.username || !this.password) {
+      console.error('Por favor, ingrese un nombre de usuario y una contraseña.');
+      // Aquí puedes mostrar un mensaje al usuario en la interfaz
+      return; // Salir si no se cumplen las condiciones
     }
 
-    this._authService.autentificacion(this.username, this.password).subscribe({
-      next: (isAuthenticated: boolean) => {
-        if (isAuthenticated) {
-          console.info("Usuario Existe");
-          this.router.navigate(['home'], {
-            state: {
-              usuario: this.username
-            }
-          });
-        } else {
-          console.error("Usuario No existe");
-          this.errorMessage = "El usuario o la contraseña es incorrecta.";
-        }
-      },
-      error: (err) => {
-        console.error("Error durante la autenticación:", err);
-        this.errorMessage = "Se produjo un error durante el inicio de sesión. Inténtalo nuevamente.";
+    try {
+      const user = await this.supabaseService.login(this.username, this.password);
+      
+      // Verificar si el usuario se ha autenticado correctamente
+      if (user) {
+        console.log('Login exitoso:', user);
+        // Redirigir al usuario a la página de inicio
+        this.router.navigate(['/home']);
+      } else {
+        console.error('Nombre de usuario o contraseña incorrectos.');
+        // Aquí puedes mostrar un mensaje al usuario en la interfaz
       }
-    });
-  }
-
-  // Nuevo método para navegar a la página de registro
-  navigateToRegister(): void {
-    this.router.navigate(['registrarse']);
+    } catch (error) {
+      console.error('Error en el login:', error);
+      // Muestra un mensaje de error al usuario
+    }
   }
 }
